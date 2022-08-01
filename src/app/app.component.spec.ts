@@ -1,15 +1,25 @@
 import { TestBed } from '@angular/core/testing';
+import { RouterModule, Routes } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { ListDetailComponent } from './list-detail/list-detail.component';
+import { ListComponent } from './list/list.component';
 
 describe('AppComponent', () => {
+  const routes: Routes = [
+    { path: '', component: ListComponent },
+    { path: 'detail/:id', component: ListDetailComponent },
+  ];
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        RouterModule.forRoot(routes)
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        ListComponent,
+        ListDetailComponent
       ],
     }).compileComponents();
   });
@@ -18,18 +28,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'search-list'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('search-list');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('search-list app is running!');
   });
 });
