@@ -2,10 +2,11 @@
     <mat-label>Total count of list :{{options.length}}</mat-label>
 
     <mat-form-field class="example-full-width" appearance="fill">
-        
+
         <input type="text" placeholder="Pick one" aria-label="" matInput [formControl]="myControl"
             [matAutocomplete]="auto">
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [disableRipple]='true' (optionSelected)='getOption($event.option.value)'>
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [disableRipple]='true'
+            (optionSelected)='getOption($event.option.value)'>
             <mat-option *ngIf="loading">
                 <mat-spinner diameter="35"></mat-spinner>
             </mat-option>

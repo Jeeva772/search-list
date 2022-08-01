@@ -10,19 +10,18 @@ import { ListService } from '../services/list.service';
   styleUrls: ['./list.component.css'],
 })
 export class ListComponent implements OnInit {
-  options:any[] = [];  
+  options: any[] = [];
   myControl = new FormControl('');
   filteredOptions!: Observable<string[]>;
   loading: boolean = false;
   listData: any;
-  constructor(private router: Router,
-    private listService: ListService) {}
+  constructor(private router: Router, private listService: ListService) {}
   ngOnInit() {
-    this.listService.getListItem().subscribe((data)=>{
-      console.log(data);
+    this.listService.getListItem().subscribe((data) => {
       this.listData = data;
-      this.options = data.map((val: any)=> {return val.name});
-      console.log(this.options)
+      this.options = data.map((val: any) => {
+        return val.name;
+      });
     });
     this.filteredOptions = this.myControl.valueChanges.pipe(
       debounceTime(300),
@@ -33,9 +32,9 @@ export class ListComponent implements OnInit {
       map((value) => this._filter(value || ''))
     );
   }
-  getOption(val: string) {   
-    let id = this.listData.findIndex((item:any) => item.name == val);
-    this.router.navigate(['detail', this.listData[id].id])
+  getOption(val: string) {
+    let id = this.listData.findIndex((item: any) => item.name == val);
+    this.router.navigate(['detail', this.listData[id].id]);
   }
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
